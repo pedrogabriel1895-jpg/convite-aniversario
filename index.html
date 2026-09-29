@@ -200,7 +200,28 @@ function fadeTo(v,ms=3000){
   const from=player.getVolume(),t0=performance.now();
   (function step(t){const p=Math.min(1,(t-t0)/ms);player.setVolume(Math.round(from+(v-from)*p));if(p<1)requestAnimationFrame(step);})(t0);
 }
-function start(){ player.setVolume(0); player.playVideo(); fadeTo(TARGET_VOL); }
+function start(){
+  let t=0; try{t=parseFloat(sessionStorage.getItem('musicT'))||0;}catch(e){}
+  player.setVolume(0); if(t>1)player.seekTo(t,true); player.playVideo(); fadeTo(TARGET_VOL); started=true;
+}
+
+/* Retoma de onde parou quando a pessoa volta pra aba (ex.: depois de abrir o mapa) */
+let started=false, lastT=0;
+function saveT(){ if(!ready||!started)return; try{lastT=player.getCurrentTime();sessionStorage.setItem('musicT',lastT);}catch(e){} }
+function resume(){
+  if(!ready||!started||muted)return;
+  const s=player.getPlayerState();
+  if(s===YT.PlayerState.PLAYING||s===YT.PlayerState.BUFFERING)return;
+  if(lastT>1&&Math.abs(player.getCurrentTime()-lastT)>3)player.seekTo(lastT,true);
+  player.playVideo(); player.setVolume(0); fadeTo(TARGET_VOL,1500);
+}
+setInterval(saveT,2000);
+document.addEventListener('visibilitychange',()=>{document.hidden?saveT():(resume(),setTimeout(resume,500),setTimeout(resume,1500));});
+window.addEventListener('pagehide',saveT);
+window.addEventListener('pageshow',()=>{resume();setTimeout(resume,500);});
+window.addEventListener('focus',resume);
+/* Se o navegador bloquear a retomada automática, o primeiro toque na página religa */
+['pointerdown','touchstart','scroll'].forEach(ev=>window.addEventListener(ev,resume,{passive:true}));
 
 /* ---------- Entrada ---------- */
 const intro=document.getElementById('intro'), mute=document.getElementById('mute');
