@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aniversário do Pedão · Seu Buteco</title>
+<meta name="description" content="Bora festejar comigo! Sexta, 19h, no Seu Buteco MCZ. Confirme sua presença até 01/10 às 10h.">
+<meta name="theme-color" content="#0b0d12">
+<meta property="og:title" content="Vem festejar meu aniversário! 🍻">
+<meta property="og:description" content="Sexta, 19h · Seu Buteco MCZ · Confirme até 01/10 às 10h">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bowlby+One&family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --yellow:#f6c400; --yellow2:#ffd83a; --bg:#0b0d12; --bg2:#141821; --ink:#f4f1e8; --red:#e5432f; --green:#2fae5c; --blue:#2f7fe5;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto}
+body{background:var(--bg);color:var(--ink);font-family:'Rubik',system-ui,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.display{font-family:'Bowlby One','Rubik',sans-serif;text-transform:uppercase;letter-spacing:.01em;line-height:.95}
+section{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;padding:80px 20px;overflow:hidden}
+.y{color:var(--yellow)}
+
+/* Intro overlay */
+#intro{position:fixed;inset:0;z-index:100;background:var(--yellow);color:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;text-align:center;padding:24px;transition:transform .9s cubic-bezier(.7,0,.2,1)}
+#intro.gone{transform:translateY(-100%)}
+.logo{background:#111;color:var(--yellow);border-radius:50%;width:150px;height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:6px solid #111;box-shadow:0 0 0 6px var(--yellow2),0 0 0 10px #111;animation:pop 1.2s ease both}
+.logo small{font:700 .7rem 'Rubik';letter-spacing:.3em}
+.logo b{font-family:'Bowlby One';font-size:2.1rem;line-height:.9}
+@keyframes pop{0%{transform:scale(0) rotate(-40deg)}70%{transform:scale(1.1) rotate(6deg)}100%{transform:scale(1) rotate(0)}}
+#intro h1{font-size:clamp(2rem,9vw,3.4rem)}
+#intro p{font-weight:500;max-width:320px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:900 1.05rem 'Rubik';text-transform:uppercase;letter-spacing:.04em;text-decoration:none;border:0;cursor:pointer;padding:16px 28px;border-radius:999px;transition:transform .2s,box-shadow .2s}
+.btn:active{transform:scale(.96)}
+.btn-dark{background:#111;color:var(--yellow);box-shadow:0 8px 0 #000}
+.btn-yellow{background:var(--yellow);color:#111;box-shadow:0 8px 0 #a98800}
+.btn-ghost{background:transparent;color:var(--ink);border:2px solid rgba(244,241,232,.35);box-shadow:none}
+.btn-wa{background:#25d366;color:#04210f;box-shadow:0 8px 0 #158a41;font-size:1.2rem;padding:20px 32px}
+.btn:hover{transform:translateY(-3px)}
+
+/* Bandeirinhas */
+.flags{position:absolute;top:0;left:0;width:100%;height:120px;pointer-events:none;z-index:2}
+.flags svg{width:100%;height:100%}
+.flag{transform-origin:top center;animation:sway 3s ease-in-out infinite}
+@keyframes sway{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+
+/* Music toggle */
+#mute{position:fixed;right:14px;bottom:14px;z-index:60;width:52px;height:52px;border-radius:50%;border:0;background:var(--yellow);color:#111;font-size:1.4rem;cursor:pointer;box-shadow:0 4px 0 #a98800,0 8px 24px rgba(0,0,0,.5);display:none}
+#mute.on{display:block}
+#yt{position:fixed;left:-9999px;top:0;width:1px;height:1px;opacity:0;pointer-events:none}
+#bar{position:fixed;top:0;left:0;height:5px;background:var(--yellow);width:0;z-index:70}
+
+/* Hero */
+#hero{background:radial-gradient(ellipse at 50% 30%,#3a2a06 0%,var(--bg) 70%);flex-direction:column;text-align:center;gap:26px}
+#hero .tag{background:var(--yellow);color:#111;font-weight:900;padding:8px 18px;border-radius:999px;letter-spacing:.15em;font-size:.8rem;text-transform:uppercase}
+#hero h1{font-size:clamp(3.2rem,17vw,9rem)}
+#hero .sub{font-size:clamp(1.1rem,4.5vw,1.6rem);opacity:.85;font-weight:500}
+.scroll{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;opacity:.7;text-align:center}
+.scroll i{display:block;width:2px;height:38px;background:var(--yellow);margin:10px auto 0;animation:drop 1.6s infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.emoji{position:absolute;font-size:2rem;opacity:.9;will-change:transform}
+
+/* Mensagem */
+#msg{background:var(--yellow);color:#111;text-align:center}
+#msg h2{font-size:clamp(2.2rem,11vw,6rem);max-width:900px}
+#msg h2 span{display:inline-block;opacity:.12}
+#msg p{margin-top:28px;font-size:clamp(1.1rem,4vw,1.5rem);font-weight:500;max-width:520px;margin-inline:auto;opacity:0}
+
+/* Info */
+#info{background:var(--bg);flex-direction:column;gap:34px}
+#info h2{font-size:clamp(2rem,9vw,4rem);text-align:center}
+.cards{display:grid;gap:18px;width:100%;max-width:720px;grid-template-columns:1fr 1fr}
+.card{background:var(--bg2);border:2px solid rgba(246,196,0,.35);border-radius:22px;padding:22px 18px;text-align:center;opacity:0}
+.card .ic{font-size:2.2rem}
+.card .k{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;opacity:.65;margin:8px 0 4px}
+.card .v{font-family:'Bowlby One';font-size:clamp(1.5rem,7vw,2.4rem);color:var(--yellow);line-height:1}
+.card .s{font-size:.9rem;opacity:.8;margin-top:6px}
+.card.wide{grid-column:1/-1}
+
+/* Local */
+#place{background:linear-gradient(180deg,var(--bg),#1b1405);flex-direction:column;text-align:center;gap:22px}
+#place .big{font-size:clamp(2.6rem,14vw,7rem)}
+#place address{font-style:normal;font-size:1.1rem;opacity:.85;max-width:420px}
+.row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:8px}
+
+/* Menu */
+#menu{background:var(--red);color:#fff;flex-direction:column;text-align:center;gap:24px}
+#menu h2{font-size:clamp(2.2rem,11vw,5.5rem)}
+#menu p{font-size:1.15rem;max-width:420px;font-weight:500}
+#menu .btn{background:#fff;color:#111;box-shadow:0 8px 0 rgba(0,0,0,.3)}
+.food{font-size:3rem;letter-spacing:.3em}
+
+/* RSVP */
+#rsvp{background:var(--bg);flex-direction:column;text-align:center;gap:22px}
+#rsvp .deadline{display:inline-block;background:var(--yellow);color:#111;font-weight:900;padding:10px 20px;border-radius:14px;font-size:clamp(1rem,4.5vw,1.4rem);transform:rotate(-2deg)}
+#rsvp h2{font-size:clamp(2.2rem,11vw,5.5rem)}
+#rsvp p{font-size:1.1rem;max-width:420px;opacity:.85}
+#cd{font-family:'Bowlby One';color:var(--yellow);font-size:clamp(1.2rem,5vw,1.8rem)}
+footer{font-size:.8rem;opacity:.5;margin-top:24px}
+
+@media(prefers-reduced-motion:reduce){.flag,.scroll i{animation:none}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div id="yt"></div>
+<button id="mute" aria-label="Ligar ou desligar o som">🔊</button>
+
+<!-- Entrada -->
+<div id="intro">
+  <div class="logo"><small>SEU</small><b>BUTECO</b><small>MCZ</small></div>
+  <h1 class="display">Tem convite<br>pra você!</h1>
+  <p>Toque para entrar. Aumenta um pouquinho o som do celular 🎶</p>
+  <button class="btn btn-dark" id="enter">Abrir convite 🍻</button>
+</div>
+
+<!-- 1. Hero -->
+<section id="hero">
+  <svg class="flags" viewBox="0 0 400 120" preserveAspectRatio="none" aria-hidden="true" id="flagsSvg"></svg>
+  <span class="tag">Você está convidado</span>
+  <h1 class="display"><span class="y">Bora</span><br>festejar<br>comigo!</h1>
+  <p class="sub">Pagode, cerveja gelada e gente boa.</p>
+  <div class="scroll">role<i></i></div>
+</section>
+
+<!-- 2. Mensagem -->
+<section id="msg">
+  <div>
+    <h2 class="display" id="msgText">Quero festejar meu aniversário com você!</h2>
+    <p>Porque comemoração boa não existe sem os amigos. Sua presença é o melhor presente. 🎂</p>
+  </div>
+</section>
+
+<!-- 3. Info -->
+<section id="info">
+  <h2 class="display">Anota <span class="y">aí</span></h2>
+  <div class="cards">
+    <div class="card"><div class="ic">📅</div><div class="k">Dia</div><div class="v">Sexta</div><div class="s">02 de outubro</div></div>
+    <div class="card"><div class="ic">🕖</div><div class="k">Horário</div><div class="v">19h</div><div class="s">pontualidade é cerveja gelada</div></div>
+    <div class="card wide"><div class="ic">🎟️</div><div class="k">Couvert artístico</div><div class="v">R$ 15</div><div class="s">por pessoa, pago no bar</div></div>
+  </div>
+</section>
+
+<!-- 4. Local -->
+<section id="place">
+  <span class="tag" style="background:var(--yellow);color:#111;font-weight:900;padding:8px 18px;border-radius:999px;letter-spacing:.15em;font-size:.8rem;text-transform:uppercase">Onde vai ser</span>
+  <h2 class="display big"><span class="y">Seu</span><br>Buteco</h2>
+  <address>Rua José Maia Gomes, 321<br>Jatiúca · Maceió – AL</address>
+  <div class="row">
+    <a class="btn btn-yellow" href="https://maps.app.goo.gl/WC6hCm2Cwrv2Ei3EA" target="_blank" rel="noopener">📍 Google Maps</a>
+    <a class="btn btn-ghost" href="https://waze.com/ul?q=Seu%20Buteco%20Rua%20Jos%C3%A9%20Maia%20Gomes%20321%20Jati%C3%BAca%20Macei%C3%B3&navigate=yes" target="_blank" rel="noopener">🚗 Waze</a>
+  </div>
+</section>
+
+<!-- 5. Cardápio -->
+<section id="menu">
+  <div class="food">🍺🍤🍔</div>
+  <h2 class="display">Já dá pra<br>escolher!</h2>
+  <p>Petiscos, cardápio e tudo do jeitinho que a gente gosta. Vai olhando pra chegar com a fome em dia.</p>
+  <a class="btn" href="https://www.instagram.com/stories/highlights/18141372487542688/" target="_blank" rel="noopener">Ver cardápio 📖</a>
+</section>
+
+<!-- 6. Confirmação -->
+<section id="rsvp">
+  <span class="deadline">Confirme até 01/10 às 10h</span>
+  <h2 class="display">Vai <span class="y">rolar</span>?<br>Me avisa!</h2>
+  <p>Clica no botão e me chama no WhatsApp. A mensagem já vai prontinha.</p>
+  <div id="cd"></div>
+  <a class="btn btn-wa" id="wa" href="https://wa.me/5582999997934?text=Pode%20confirmar%20minha%20presen%C3%A7a%20Ped%C3%A3o" target="_blank" rel="noopener">💬 Confirmar presença</a>
+  <footer>Feito com 🍻 pelo Pedão</footer>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+/* ---------- Bandeirinhas ---------- */
+(function(){
+  const cols=['#e5432f','#f6c400','#2fae5c','#2f7fe5','#ff8a2b','#d84fa0'];
+  const svg=document.getElementById('flagsSvg');
+  let h='<path d="M0 4 Q200 24 400 4" stroke="#8a6a00" stroke-width="2" fill="none"/>';
+  for(let i=0;i<20;i++){
+    const x=i*20+6, y=4+Math.sin(i/19*Math.PI)*14;
+    h+=`<g class="flag" style="animation-delay:${(i%5)*-.5}s;transform-origin:${x+7}px ${y}px"><polygon points="${x},${y} ${x+14},${y} ${x+7},${y+30}" fill="${cols[i%cols.length]}"/></g>`;
+  }
+  svg.innerHTML=h;
+})();
+
+/* ---------- Música (YouTube, volume baixo com fade) ---------- */
+const VIDEO='xfzC5lI4rE0', TARGET_VOL=22;
+let player, ready=false, muted=false, wantPlay=false;
+const tag=document.createElement('script'); tag.src='https://www.youtube.com/iframe_api'; document.head.appendChild(tag);
+window.onYouTubeIframeAPIReady=function(){
+  player=new YT.Player('yt',{height:'1',width:'1',videoId:VIDEO,
+    playerVars:{autoplay:0,controls:0,loop:1,playlist:VIDEO,playsinline:1,modestbranding:1},
+    events:{onReady:()=>{ready=true;player.setVolume(0);if(wantPlay)start();},
+            onStateChange:e=>{if(e.data===YT.PlayerState.ENDED)player.playVideo();}}});
+};
+function fadeTo(v,ms=3000){
+  const from=player.getVolume(),t0=performance.now();
+  (function step(t){const p=Math.min(1,(t-t0)/ms);player.setVolume(Math.round(from+(v-from)*p));if(p<1)requestAnimationFrame(step);})(t0);
+}
+function start(){ player.setVolume(0); player.playVideo(); fadeTo(TARGET_VOL); }
+
+/* ---------- Entrada ---------- */
+const intro=document.getElementById('intro'), mute=document.getElementById('mute');
+document.getElementById('enter').addEventListener('click',()=>{
+  wantPlay=true; if(ready)start();
+  mute.classList.add('on');
+  intro.classList.add('gone');
+  setTimeout(()=>{intro.style.display='none';play();},900);
+});
+mute.addEventListener('click',()=>{
+  if(!ready)return; muted=!muted;
+  if(muted){fadeTo(0,400);setTimeout(()=>player.pauseVideo(),420);}
+  else{player.playVideo();fadeTo(TARGET_VOL,800);}
+  mute.textContent=muted?'🔇':'🔊';
+});
+
+/* ---------- Motion / Scrollytelling ---------- */
+function play(){
+  gsap.registerPlugin(ScrollTrigger);
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches){gsap.set('.card,#msg p,#msgText span',{opacity:1});return;}
+
+  gsap.to('#bar',{width:'100%',ease:'none',scrollTrigger:{trigger:document.body,start:'top top',end:'bottom bottom',scrub:true}});
+
+  // Hero
+  const hi=gsap.timeline();
+  hi.from('#hero .tag',{y:-40,opacity:0,duration:.7})
+    .from('#hero h1',{scale:.6,opacity:0,rotate:-4,duration:.9,ease:'back.out(1.7)'},'-=.3')
+    .from('#hero .sub',{y:30,opacity:0,duration:.7},'-=.3');
+  gsap.to('#hero h1',{yPercent:-25,scale:1.15,opacity:0,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
+  // Emojis flutuando
+  ['🍻','🎶','🪘','🎉','🍺','🎂'].forEach((e,i)=>{
+    const el=document.createElement('span');el.className='emoji';el.textContent=e;
+    el.style.left=(8+i*16)+'%';el.style.top=(35+((i*37)%50))+'%';
+    document.getElementById('hero').appendChild(el);
+    gsap.to(el,{y:-30-(i%3)*15,rotate:i%2?18:-18,duration:2+i*.3,repeat:-1,yoyo:true,ease:'sine.inOut'});
+    gsap.to(el,{y:-260,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:1.5}});
+  });
+
+  // Mensagem: palavras acendem conforme rola (pinned)
+  const h=document.getElementById('msgText');
+  h.innerHTML=h.textContent.split(' ').map(w=>`<span>${w}</span>`).join(' ');
+  const mt=gsap.timeline({scrollTrigger:{trigger:'#msg',start:'top top',end:'+=130%',scrub:true,pin:true}});
+  mt.to('#msgText span',{opacity:1,stagger:.2,ease:'none'}).to('#msg p',{opacity:1,y:-6,duration:1});
+
+  // Cards entram um a um (pinned)
+  gsap.set('.card',{y:80,rotate:(i)=>i%2?4:-4});
+  const it=gsap.timeline({scrollTrigger:{trigger:'#info',start:'top top',end:'+=150%',scrub:true,pin:true}});
+  it.from('#info h2',{y:-40,opacity:0,duration:.5})
+    .to('.card',{opacity:1,y:0,rotate:0,stagger:.7,duration:1,ease:'back.out(1.6)'});
+
+  // Local
+  const pt=gsap.timeline({scrollTrigger:{trigger:'#place',start:'top 60%',toggleActions:'play none none reverse'}});
+  pt.from('#place .tag',{y:-30,opacity:0,duration:.5})
+    .from('#place .big',{scale:.4,opacity:0,rotate:6,duration:.9,ease:'back.out(1.8)'},'-=.2')
+    .from('#place address',{opacity:0,y:20,duration:.5})
+    .from('#place .btn',{opacity:0,y:30,stagger:.15,duration:.5});
+
+  // Cardápio
+  const mn=gsap.timeline({scrollTrigger:{trigger:'#menu',start:'top 60%',toggleActions:'play none none reverse'}});
+  mn.from('.food',{scale:0,duration:.8,ease:'elastic.out(1,.5)'})
+    .from('#menu h2',{x:-120,opacity:0,duration:.7},'-=.4')
+    .from('#menu p',{opacity:0,y:20,duration:.5})
+    .from('#menu .btn',{opacity:0,scale:.6,duration:.5,ease:'back.out(2)'});
+
+  // RSVP
+  const rs=gsap.timeline({scrollTrigger:{trigger:'#rsvp',start:'top 60%',toggleActions:'play none none reverse'}});
+  rs.from('.deadline',{scale:0,rotate:-20,duration:.7,ease:'back.out(2)'})
+    .from('#rsvp h2',{y:40,opacity:0,duration:.7})
+    .from('#rsvp p,#cd',{opacity:0,y:20,stagger:.15,duration:.5})
+    .from('#wa',{opacity:0,scale:.5,duration:.6,ease:'back.out(2.5)'});
+  gsap.to('#wa',{scale:1.06,duration:.8,repeat:-1,yoyo:true,ease:'sine.inOut',delay:3});
+}
+
+/* ---------- Contagem regressiva do prazo (01/10 10h, horário de Maceió, UTC-3) ---------- */
+(function(){
+  const end=new Date('2026-10-01T10:00:00-03:00'), el=document.getElementById('cd');
+  function tick(){
+    const d=end-Date.now();
+    if(d<=0){el.textContent='Prazo encerrado, mas me chama que a gente dá um jeito!';return;}
+    const h=Math.floor(d/36e5),m=Math.floor(d%36e5/6e4);
+    el.textContent=`Faltam ${h}h ${m}min pro prazo`;
+  }
+  tick();setInterval(tick,30000);
+})();
+</script>
+</body>
+</html>
